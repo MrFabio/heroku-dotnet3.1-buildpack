@@ -23,6 +23,7 @@ export_env_dir ${ENV_DIR}
 : ${NODEJS_VERSION:="10.9.0"}
 : ${DOTNET_SDK_VERSION:="3.1.102"}
 : ${DOTNET_RUNTIME_VERSION:="3.1.2"}
+: ${DOTNET_2_1_RUNTIME_VERSION:="2.1.16"}
 : ${LIBUNWIND_VERSION:="1.2.1-9"}
 
 export NUGET_XMLDOC_MODE=skip
@@ -72,6 +73,10 @@ if [ ! -d ${DOTNET_CACHE_LOCATION} ]; then
 
 	DOTNET_RUNTIME_DOWNLOAD_URL=https://download.visualstudio.microsoft.com/download/pr/38269fba-9fdb-4723-a14c-067cc316827d/53e4161da346d70404375fb8804ee91a/dotnet-runtime-$DOTNET_RUNTIME_VERSION-linux-x64.tar.gz
 	curl -sSL ${DOTNET_RUNTIME_DOWNLOAD_URL} | tar xz -C ${DOTNET_CACHE_LOCATION}/runtime
+
+	DOTNET_RUNTIME_2_1_DOWNLOAD_URL=https://download.visualstudio.microsoft.com/download/pr/55d69fac-3c70-48da-ab75-a11732ea41fd/35a62311fe92ff96dfd6b4121078bbbd/dotnet-runtime-$DOTNET_2_1_RUNTIME_VERSION-linux-x64.tar.gz
+	curl -sSL ${DOTNET_RUNTIME_2_1_DOWNLOAD_URL} | tar xz -C ${DOTNET_CACHE_LOCATION}/runtime
+
 fi
 export PATH="${DOTNET_CACHE_LOCATION}/sdk:$PATH"
 cp -r ${DOTNET_CACHE_LOCATION}/runtime ${BUILD_DIR}/dotnet
